@@ -1,4 +1,3 @@
-package com.tiurinvalery;
 
 import org.junit.Test;
 
