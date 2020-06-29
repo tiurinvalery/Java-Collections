@@ -17,8 +17,14 @@ public class CustomArrayList<E> implements List<E> {
     }
 
     public CustomArrayList(int size) {
+        if(size < 0) {
+            throw new CustomIndexOfBoundException("Provide size more than 0");
+        } else if(size == 0) {
+            this.elements = new Object[INITIAL_SIZE];
+        } else {
+            this.elements = new Object[size];
+        }
         this.size = 0;
-        this.elements = new Object[size];
     }
 
     /**
@@ -60,13 +66,17 @@ public class CustomArrayList<E> implements List<E> {
      */
     @Override
     public boolean contains(Object o) {
-        for(int i =0; i < size; i++) {
-            Object ob = this.elements[i];
-            if(ob.equals(o)) {
-                return true;
+        if(o != null) {
+            for (int i = 0; i < size; i++) {
+                Object ob = this.elements[i];
+                if (ob.equals(o)) {
+                    return true;
+                }
             }
+            return false;
+        } else {
+            throw new CustomNullPointerException("Cannot verify element, because it null");
         }
-        return false;
     }
 
     /**
@@ -168,9 +178,13 @@ public class CustomArrayList<E> implements List<E> {
      */
     @Override
     public boolean add(E e) {
-        elements[size] = e;
-        size++;
-        return true;
+        if(e != null) {
+            elements[size] = e;
+            size++;
+            return true;
+        } else {
+            throw new CustomNullPointerException("Element is null");
+        }
     }
 
     /**
@@ -196,15 +210,19 @@ public class CustomArrayList<E> implements List<E> {
      */
     @Override
     public boolean remove(Object o) {
-        for(int i =0; i < size; i++) {
-            Object ob = elements[i];
-            if(ob.equals(o)) {
-               shiftArrayLeft(i);
-               size--;
-               return true;
+        if(o != null) {
+            for (int i = 0; i < size; i++) {
+                Object ob = elements[i];
+                if (ob.equals(o)) {
+                    shiftArrayLeft(i);
+                    size--;
+                    return true;
+                }
             }
+            return false;
+        } else {
+            throw new CustomNullPointerException("Cannot remove null val from List");
         }
-        return false;
     }
 
     /**

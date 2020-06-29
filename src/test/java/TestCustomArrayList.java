@@ -57,5 +57,33 @@ public class TestCustomArrayList {
         assertEquals(2, names.size());
     }
 
+    @Test(expected = CustomIndexOfBoundException.class)
+    public void testCheckThatInitialSizeValidated() {
+        List<String> names = new CustomArrayList<>(-1);
+    }
+
+    @Test
+    public void testCheckThatInitialSizeValidatedForZeroVal() {
+        List<String> names = new CustomArrayList<>(0);
+    }
+
+    @Test(expected = CustomNullPointerException.class)
+    public void testNotPossibleToAddNull() {
+        List<String> names = new CustomArrayList<>();
+        names.add(null);
+    }
+
+    @Test(expected = CustomNullPointerException.class)
+    public void testNotPossibleRemoveNull() {
+        List<String> names = new CustomArrayList<>();
+        names.remove(null);
+    }
+
+    @Test(expected = CustomNullPointerException.class)
+    public void testNotPossibleToVerifyContainsForNull() {
+        List<String> names = new CustomArrayList<>();
+        names.contains(null);
+    }
+
 
 }
